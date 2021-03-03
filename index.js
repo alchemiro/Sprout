@@ -26,7 +26,7 @@ bot.on('voiceStateUpdate',async(oldState,NewState)=>{
         .setTitle(`${NewState.member.user.username}, Приєднавсь до голосового.`)
         .setColor(`GREEN`)
         .setTimestamp(Date())
-        .setAuthor(`${NewState.member.nickname}`, NewState.member.user.avatarURL())
+        .setAuthor(`${NewState.member.user.username}`, NewState.member.user.avatarURL())
         sChannel.send(joinEmbed)
     }
     if(oldState.channel&&!NewState.channel){
@@ -34,7 +34,7 @@ bot.on('voiceStateUpdate',async(oldState,NewState)=>{
         .setTitle(`${NewState.member.user.username}, Вийшов з голосового.`)
         .setColor(`RED`)
         .setTimestamp(Date())
-        .setAuthor(`${NewState.member.nickname}`, NewState.member.user.avatarURL())
+        .setAuthor(`${NewState.member.user.username}`, NewState.member.user.avatarURL())
         sChannel.send(leaveEmbed)
     }
     if(NewState.streaming&&!oldState.streaming){
@@ -46,7 +46,7 @@ bot.on('voiceStateUpdate',async(oldState,NewState)=>{
          const sEmbed=new Discord.MessageEmbed()
          .setTitle('Стрім почався, заходьте!')
          .setColor('GREEN')
-         .setAuthor(`${NewState.member.user.tag}`,NewState.member.user.avatarURL())
+         .setAuthor(`${NewState.member.user.username}`,NewState.member.user.avatarURL())
          .setTimestamp(Date())
          const msg=await sChannel.send(`${NewState.guild.roles.cache.get('814229032546992129')}, Почав стрім!`)
          msg.edit(sEmbed)
@@ -57,7 +57,7 @@ bot.on('voiceStateUpdate',async(oldState,NewState)=>{
          const sEmbed=new Discord.MessageEmbed()
          .setTitle('Стрім закінчився!')
          .setColor('RED')
-         .setAuthor(`${oldState.member.user.tag}`,NewState.member.user.avatarURL())
+         .setAuthor(`${oldState.member.user.username}`,NewState.member.user.avatarURL())
          .setTimestamp(Date())
          sChannel.updateOverwrite(sChannel.guild.roles.cache.get('814229032546992129'), {
              SEND_MESSAGES: false
